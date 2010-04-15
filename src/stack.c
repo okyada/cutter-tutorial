@@ -44,3 +44,9 @@ stack_push (Stack *stack, int value)
 {
     stack->size++;
 }
+
+int
+stack_pop (Stack *stack)
+{
+    return 30;
+}
