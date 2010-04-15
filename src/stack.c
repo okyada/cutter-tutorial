@@ -42,27 +42,29 @@ stack_get_size (Stack *stack)
     return stack->size;
 }
 
-static int *
+static int
 stack_realloc (Stack *stack)
 {
-    return realloc(stack->data, sizeof(*stack->data) * stack->size);
+    int *new_data;
+
+    new_data = realloc(stack->data, sizeof(*stack->data) * stack->size);
+    if (stack->size > 0 && !new_data) {
+        free(stack->data);
+        stack->data = NULL;
+        stack->size = 0;
+        return FALSE;
+    }
+    stack->data = new_data;
+
+    return TRUE;
 }
 
 void
 stack_push (Stack *stack, int value)
 {
-    int *new_data;
-
     stack->size++;
-    new_data = stack_realloc(stack);
-    if (!new_data) {
-        free(stack->data);
-        stack->data = NULL;
-        stack->size = 0;
+    if (!stack_realloc(stack))
         return;
-    }
-    stack->data = new_data;
-
     stack->data[stack->size - 1] = value;
 }
 
@@ -70,19 +72,9 @@ int
 stack_pop (Stack *stack)
 {
     int value;
-    int *new_data;
 
     stack->size--;
     value = stack->data[stack->size];
-
-    new_data = stack_realloc(stack);
-    if (stack->size > 0 && !new_data) {
-        free(stack->data);
-        stack->data = NULL;
-        stack->size = 0;
-        return value;
-    }
-    stack->data = new_data;
-
+    stack_realloc(stack);
     return value;
 }

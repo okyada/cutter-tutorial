@@ -1,6 +1,10 @@
 #include <cutter.h>
 #include <stack.h>
 
+void test_new_stack (void);
+void test_push (void);
+void test_pop (void);
+
 static Stack *stack;
 
 void
