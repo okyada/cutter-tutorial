@@ -1,0 +1,16 @@
+.deps
+.libs
+*.in
+*.la
+*.lo
+*.o
+Makefile
+aclocal.m4
+autom4te.cache
+config
+config.log
+config.status
+configure
+libtool
+src/config.h
+stamp-h1
