@@ -1,10 +1,24 @@
 #include <cutter.h>
 #include <stack.h>
 
+static Stack *stack;
+
+void
+cut_setup (void)
+{
+    stack = NULL;
+}
+
+void
+cut_teardown (void)
+{
+    if (stack)
+        stack_free(stack);
+}
+
 void
 test_new_stack (void)
 {
-    Stack *stack;
     stack = stack_new();
     cut_assert(stack_is_empty(stack));
 }
@@ -12,8 +26,6 @@ test_new_stack (void)
 void
 test_push (void)
 {
-    Stack *stack;
-
     stack = stack_new();
     cut_assert_equal_int(0, stack_get_size(stack));
     stack_push(stack, 100);
