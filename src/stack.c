@@ -15,3 +15,14 @@ stack_is_empty (Stack *stack)
 {
     return TRUE;
 }
+
+int
+stack_get_size (Stack *stack)
+{
+    return 0;
+}
+
+void
+stack_push (Stack *stack, int value)
+{
+}
