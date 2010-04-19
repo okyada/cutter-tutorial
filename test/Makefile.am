@@ -14,5 +14,7 @@ LDFLAGS = -module -rpath $(libdir) -avoid-version -no-undefined
 
 test_stack_la_SOURCES = test-stack.c
 
+EXTRA_DIST = run-test.sh
+
 echo-cutter:
 	@echo $(CUTTER)
